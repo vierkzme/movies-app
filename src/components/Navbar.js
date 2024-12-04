@@ -8,8 +8,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const fetchMovies = async () => {
-    const API_KEY = "ae59de83";
-    const apiURL = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${keyword}`;
+    const apiURL = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${keyword}`;
     try {
       const response = await fetch(apiURL);
       const respJSON = await response.json();
