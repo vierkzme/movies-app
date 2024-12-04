@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
+import MovieCard from "./components/MovieCard";
 
-function App() {
+export default function App() {
+  const movies = useSelector((state) => state.movies);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-orange-50">
+      <Navbar />
+      <main className="container mx-auto px-4 py-8">
+        {movies.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {movies.map((movie, index) => (
+              <MovieCard
+                key={index}
+                title={movie.title}
+                imageUrl={movie.imageUrl}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500">No movies found.</p>
+        )}
+      </main>
     </div>
   );
 }
-
-export default App;
